@@ -1,9 +1,9 @@
 my ($p1, $p2) X= 0;
 
 for '2.txt'.IO.lines -> $line {
-    my @v = $line.words.map: { .Int };
+    my @v = $line.words>>.Int;
     ++$p1 if safe(@v);
-    ++$p2 if safe(@v) || @v.combinations(+@v-1).map(*.&safe).any;
+    ++$p2 if (@v | @v.combinations(+@v-1).any).&safe;
 }
 
 sub safe(@v) { 
